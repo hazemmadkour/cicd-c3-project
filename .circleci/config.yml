@@ -81,7 +81,7 @@ jobs:
       - restore_cache:
           keys: [frontend-build]
       - run:
-          name: Build front-end
+          name: test front-end
           command: |
             cd frontend
             npm install
@@ -97,7 +97,7 @@ jobs:
       - restore_cache:
           keys: [backend-build]
       - run:
-          name: Back-end build
+          name: Back-end test
           command: |
             cd backend
             npm install
@@ -106,12 +106,14 @@ jobs:
   scan-frontend:
     docker:
       - image: circleci/node:13.8.0
+    environment:
+      NODE_ENV: development
     steps:
       - checkout
       - restore_cache:
           keys: [frontend-build]
       - run:
-          name: Build front-end
+          name: Scan front-end
           command: |
             cd frontend
             npm install
@@ -120,12 +122,14 @@ jobs:
   scan-backend:
     docker:
       - image: circleci/node:13.8.0
+    environment:
+      NODE_ENV: development
     steps:
       - checkout
       - restore_cache:
           keys: [backend-build]
       - run:
-          name: Back-end build
+          name: Back-end Scan
           command: |
             cd backend
             npm install
