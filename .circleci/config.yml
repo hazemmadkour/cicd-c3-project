@@ -179,11 +179,6 @@ jobs:
       - checkout
       - add_ssh_keys:
           fingerprints: ["e0:0b:90:9a:c6:af:e4:b7:7b:ed:40:22:04:00:20:6b"]
-      - attach_workspace:
-          at: ~/
-      - run:
-          name: install ansible
-          command: apk add --update ansible
       - run:
           name: run ansible palybook
           command: |
