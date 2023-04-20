@@ -184,8 +184,7 @@ jobs:
           name: run ansible palybook
           command: |
             cd .circleci/ansible
-            # aws ec2 describe-instances --region us-east-1 --query 'Reservations[*].Instances[*].PublicIpAddress' --output text >> inventory.txt
-            cat inventory.txt
+            aws ec2 describe-instances --region us-east-1 --query 'Reservations[*].Instances[*].PublicIpAddress' --output text >> inventory.txt
             ansible-playbook configure-server.yml -i inventory.txt
       - destroy-environment 
 
