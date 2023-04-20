@@ -193,7 +193,7 @@ jobs:
 
   run-migrations:
     docker:
-      - image: circleci/node:13.8.0
+      - image: hazemmadkour/aws-node
     environment:
       NODE_ENV: development
     steps:
