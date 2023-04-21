@@ -319,7 +319,7 @@ jobs:
 
   cleanup:
       docker:
-      - image: hazemmadkour/aws-node
+        - image: hazemmadkour/aws-node
       steps:
         - checkout
         - run:
