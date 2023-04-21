@@ -275,7 +275,9 @@ jobs:
           name: Backend smoke test.
           command: |
             export BACKEND_PUBLIC_IP=$(aws ec2 describe-instances --region us-east-1 --query 'Reservations[*].Instances[*].PublicIpAddress' --output text)
-            if curl "http://$BACKEND_PUBLIC_IP:3030/api/status" | grep "ok"
+            URL="http://$BACKEND_PUBLIC_IP:3030/api/status"
+            echo ${URL}
+            if curl -s ${URL} | grep "ok"
             then
               exit 0
             else
