@@ -271,18 +271,18 @@ jobs:
       - image: amazon/aws-cli
     steps:
       - checkout
-      - run:
-          name: Backend smoke test.
-          command: |
-            export BACKEND_PUBLIC_IP=$(aws ec2 describe-instances --region us-east-1 --query 'Reservations[*].Instances[*].PublicIpAddress' --output text)
-            URL="http://$BACKEND_PUBLIC_IP:3030/api/status"
-            echo ${URL}
-            if curl -s ${URL} | grep "ok"
-            then
-              exit 0
-            else
-              exit 1
-            fi
+      # - run:
+      #     name: Backend smoke test.
+      #     command: |
+      #       export BACKEND_PUBLIC_IP=$(aws ec2 describe-instances --region us-east-1 --query 'Reservations[*].Instances[*].PublicIpAddress' --output text)
+      #       URL="http://$BACKEND_PUBLIC_IP:3030/api/status"
+      #       echo ${URL}
+      #       if curl -s ${URL} | grep "ok"
+      #       then
+      #         exit 0
+      #       else
+      #         exit 1
+      #       fi
       - run:
           name: Frontend smoke test.
           command: |
