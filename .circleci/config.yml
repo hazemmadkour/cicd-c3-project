@@ -326,13 +326,6 @@ jobs:
     steps:        
       - checkout
       - run:
-          name: Save Old Workflow ID to kvdb.io
-          command: |
-            export OLD_WORKFLOW_ID=$(aws cloudformation \
-                      list-exports --query "Exports[?Name==\`WorkflowID\`].Value" \
-                      --no-paginate --output text)
-            curl --insecure -k https://kvdb.io/9Xupi44kH5oGMq73YVNDcB/old_workflow_id -d "${OLD_WORKFLOW_ID}"
-      - run:
           name: Update cloudfront distribution
           command: |
             aws cloudformation deploy \
@@ -365,8 +358,9 @@ jobs:
               aws cloudformation delete-stack --stack-name "udapeople-backend-${OldWorkflowID}"
               aws cloudformation delete-stack --stack-name "udapeople-frontend-${OldWorkflowID}"
             fi
-      # - destroy-environment 
-            
+      - run:
+          name: Save Workflow ID to kvdb.io
+          command: curl --insecure -k https://kvdb.io/9Xupi44kH5oGMq73YVNDcB/old_workflow_id -d "${CIRCLE_WORKFLOW_ID:0:5}"
 
 workflows:
   default:
